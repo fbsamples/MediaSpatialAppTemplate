@@ -30,6 +30,8 @@ class MainFragment : Fragment() {
       savedInstanceState: Bundle?
   ): View {
     currentView = inflater.inflate(R.layout.fragment_main, container, false)
+    val imageView = currentView.findViewById<LinearLayout>(R.id.linearLayout)
+    imageView.setOnClickListener { view -> switchToThirdPartyNotice() }
     populateMediaShelves(arrayOf("Popular", "Trending", "Evergreen"))
     return currentView
   }
@@ -53,6 +55,13 @@ class MainFragment : Fragment() {
     val titleTextView = movieTitleView.findViewById<TextView>(R.id.media_title_text)
     titleTextView.text = title.title
     shelfView.addView(movieTitleView)
+  }
+
+  private fun switchToThirdPartyNotice() {
+    parentFragmentManager.commit {
+      addToBackStack("third_party_notice")
+      replace(R.id.container, ThirdPartyNoticeFragment())
+    }
   }
 
   private fun switchToMediaScreen(mediaUrl: String) {

@@ -60,12 +60,15 @@
             android:orientation="horizontal"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
 
             <ImageView
                 android:id="@+id/user_icon"
+
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
@@ -78,7 +81,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="64dp"
+        android:layout_marginTop="64dp"
         >
         <LinearLayout
             android:id="@+id/media_shelves_view"
