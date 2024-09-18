@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 
 class ThirdPartyNoticeFragment : Fragment() {
@@ -25,6 +26,8 @@ class ThirdPartyNoticeFragment : Fragment() {
     val webView = view.findViewById<WebView>(R.id.thirdPartyWebView)
     webView.webViewClient = WebViewClient()
     webView.loadUrl("file:///android_asset/third_party.html")
+    val backButton = view.findViewById<ImageButton>(R.id.back_button_third_party)
+    backButton.setOnClickListener { activity?.onBackPressed() }
     return view
   }
 }

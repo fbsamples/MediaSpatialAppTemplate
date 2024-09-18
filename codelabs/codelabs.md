@@ -60,7 +60,7 @@ android {
 This section covers
 * Add Meta Spatial SDK into the project.
 * Create an immersive scene with skybox and room environment.
-* Render the android app as a panel in the immersive scene. 
+* Render the android app as a panel in the immersive scene.
 
 ### 2.1 Add Meta Spatial SDK
 1. Download the Meta Spatial SDK library.
@@ -125,7 +125,7 @@ class ImmersiveActivity : AppSystemActivity() {
    override fun onSceneReady() {
       super.onSceneReady()
       scene.setViewOrigin(0.0f, 0.0f, 0.0f)
-      
+
 +    // Create Entities
 +    Entity.create(
 +        listOf(
@@ -148,13 +148,13 @@ class ImmersiveActivity : AppSystemActivity() {
 +              baseColor = Color4(red = 1.0f, green = 0.1f, blue = 0.1f, alpha = 1.0f)
 +            },
 +            Transform(Pose(Vector3(0.0f, 0.2f, 1.5f), Quaternion(0f, 0f, 0f)))))
-     
+
       )
    }
 ```
-5. Open the `AndroidManifest.xml` under `app/src/main`, comment-out or delete the `<activity>` tags under the `<application>` tags.\
+5. Open the `AndroidManifest.xml` under `app/src/main`, comment-out or delete the `activity` tags under the `application` tags.\
 <img src="img/comment_out_manifest.png" width=480>
-6. Open the `AdnroidManifest.xml` under `app/src/quest`, with following code changes under `<manifest>` tag. This step added need features for the app and update the main entry of the app to the ImmersiveActivity.
+6. Open the `AdnroidManifest.xml` under `app/src/quest`, with following code changes under `manifest` tag. This step added need features for the app and update the main entry of the app to the ImmersiveActivity.\
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -176,7 +176,6 @@ class ImmersiveActivity : AppSystemActivity() {
 +   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-
 ...
 
        <activity
@@ -203,7 +202,6 @@ class ImmersiveActivity : AppSystemActivity() {
 +               <category android:name="android.intent.category.LAUNCHER" />
 +           </intent-filter>
 +       </activity>
-...
 ```
 6. Start the app on Quest device, you should see an immersive scene like below.\
 <img src="img/immersive_scene.jpg" width=640>
@@ -271,7 +269,7 @@ This section covers
 ### 3.1 Add Lighting
 1. Copy the IBL(Image Based Lighting) file `chromatic.env` from `codelabs/resources` to `app/src/quest/assets`.\
 <img src="img/lighting_file.png" width=320>
-2. In `ImmersirveActivity.kt`, add following code to `onSceneReady` method. `setLightingEnvironment` set the environment lighting for the scene, and mixed up with IBL. 
+2. In `ImmersirveActivity.kt`, add following code to `onSceneReady` method. `setLightingEnvironment` set the environment lighting for the scene, and mixed up with IBL.
 ```diff
 ...
   override fun onSceneReady() {
@@ -303,7 +301,7 @@ This section covers
 ...
 ```
 2. Copy the TV controller model file `Controller.glb` from `codelabs/resources` to `app/src/quest/assets`.
-3. In `ImmersiveActivity`'s `onSceneReady` method, Replace the cube entity with the TV controller 3D model. Add `Grabbable` and `Physics` component to the entity. `Grabbable` make the model can be grabbed by controllers' grab key. 
+3. In `ImmersiveActivity`'s `onSceneReady` method, Replace the cube entity with the TV controller 3D model. Add `Grabbable` and `Physics` component to the entity. `Grabbable` make the model can be grabbed by controllers' grab key.
 ```diff
 +import com.meta.spatial.physics.Physics
 +import com.meta.spatial.physics.PhysicsState
@@ -339,7 +337,7 @@ This section covers
   }
 
 ```
-4. Inside `onSceneReady` method, create an invisible floor so the controller model can interact with it and won't fall out of the scene. 
+4. Inside `onSceneReady` method, create an invisible floor so the controller model can interact with it and won't fall out of the scene.
 ```diff
 ...
   override fun onSceneReady() {
