@@ -1,25 +1,27 @@
-# Meta Spatial App Code Lab
+# Meta Media Spatial App Code Lab
 
 ## Requirements
 1. [Android Studio](https://developer.android.com/studio)
 2. Android SDK 34, and build tools.
 3. Quest devices with Horizon OS v69+, and developer mode enabled.
-4. (Optional) Android Emulator
+4. (Optional) Android Emulator.
 
-## 1. Running the sample app on Quest.
-This section covers
-* Porting the mobile Android app to Quest, creating separate build variants with [ProductFlavors](https://developer.android.com/reference/tools/gradle-api/7.4/com/android/build/api/dsl/ProductFlavor) to showcase Cross-platform-ness (one codebase, multiple targets).
+## 1. Run the sample app on Meta Quest.
+* Port a mobile Android app to Meta Quest device
+* Create build variants with [ProductFlavors](https://developer.android.com/reference/tools/gradle-api/7.4/com/android/build/api/dsl/ProductFlavor) to showcase Cross-platform-ness (one codebase, multiple targets).
 
 ### 1.1 Setup
-1. Make sure your setup meet the [requirements](#requirements).
-2. Clone this project from Github.
-   `git clone https://github.com/fbsamples/MediaSpatialAppTemplate.git`
-3. Open and import the project into Android studio.
-4. (Optional) Start the app in Android Emulator or on a connected Android Device. You will see something like following screenshot.
+1. Make sure the [requirements](#requirements) are met.
+2. Download the project [zip](https://codeload.github.com/fbsamples/MediaSpatialAppTemplate/zip/refs/heads/main), and unzip the project.
+3. Open and import the project into Android Studio, wait the project synced by the gradle task.
+4. Switch the Android Studio to Project view.   
+<img src="img/project_view.png" width=320 />
+5. (Optional) Start the app in Android Emulator. You will see something like the following screenshot. Then stop the running Android device.    
+<img src="img/run_app.gif" width=320 />  
 <img src="img/emulator_screen.png" width=320 />
 
-### 1.2 Add Quest build flavor
-1. Open `build.gradle.kts` in app module(`{projectRoot}/app`).  add following code into the `android` block.
+### 1.2 Add quest build flavor
+1. Open the `build.gradle.kts` in app module(`{projectRoot}/app`), and add following code into the `android` block.
 ```diff
 android {
   namespace = "com.meta.media.template"
@@ -33,36 +35,36 @@ android {
 + }
 }
 ```
-2. Create two new folders under `{projectRoot}/app/src` with names `mobile` and `quest` and copy the `AndroidManifest.xml` from `src/main` folder into them. we'll use these folders to manage the differences between the mobile (phone) version and the Quest (Meta Spatial SDK) version of our app.  
-   <img src="img/build_flavors.png" width=320 />
-3. Sync the project with the new gradle files.  
-   <img src="img/ide_gradle.gif" width="320" />
-4. Switch current build variant to 'quest'. In menu, select `Build -> Select Build Variant`. In the Build Variants window, select `questDebug` as the active build variant.  
-   <img src="img/build_variant.png" width=320 />
-5. Update `AndroidManifest.xml` in `app/src/quest` with follow code.
-```xml
+2. Create two new folders under `{projectRoot}/app/src` with names `mobile` and `quest`. We'll use these folders to manage the differences between the phone version and the Meta Quest version of our app.
+4. Copy the `AndroidManifest.xml` from `{projectRoot}/src/main` folder into the new folders.  
+<img src="img/build_flavors.png" width=320 />
+5. Sync the project with the new gradle config.  
+<img src="img/ide_gradle.gif" width="320" />
+6. Switch current build variant to 'quest'. In menu, select `Build -> Select Build Variant`. In the Build Variants window, select `questDebug` as the active build variant.  
+<img src="img/build_variant.png" width=320 />
+7. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest` folder, add `android:screenOrientation` inside `activity` tag of the `MainActivity`, and set the screen orientation to landscape.
+```diff
 <?xml version="1.0" encoding="utf-8"?>
 ...
    <application
        ...
-       <activity
+   <activity
            android:name=".MainActivity"
 +          android:screenOrientation="landscape"
 ...
 ```
-6. Connect the Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.  
+8. Connect a Meta Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.  
    <img src="img/start_app.png" width="320" >
-6. Put on your headset, you will see the app is launched in landscape mode.  
+9. Put on your headset, you will see the app is launched in landscape mode.  
    <img src="img/quest_screenshot.jpeg" width="640" >
 
 ## 2. Display the app in an immersive scene
-This section covers
-* Add Meta Spatial SDK into the project.
-* Create an immersive scene with skybox and room environment.
-* Render the android app as a panel in the immersive scene.
+* Add Meta Spatial SDK into the project
+* Create an immersive scene with skybox and room environment
+* Render the Android app as a panel in the immersive scene
 
 ### 2.1 Add Meta Spatial SDK
-1. Import the libraries from Maven Central into the project by updating the `build.gradle.kts` under `app` folder. Sync the project with the new gradle files.
+1. Import the libraries from Maven into the project by updating the `build.gradle.kts` under `{projectRoot}/app` folder. Then sync the project with the new gradle config. If everything works fine, skip step 2 and 3.
 ```diff
 dependencies {
 ...
@@ -77,9 +79,9 @@ dependencies {
 ...
 }
 ```
-2. Skip this if step 1 works, create a new folder named `libs` under `{projectRoot}/app` folder, and copy all .aar files from `` to here.  
+2. **(Skip this if step 1 works)**. *Create a new folder named `libs` under `{projectRoot}/app` folder, and copy all .aar files from `{projectRoot}/codelabs/resources/libs` to here*.  
    <img src="img/sdk_aars.png" width=320>
-3. Skip this if step 1 works, updating the `build.gradle.kts` under `app` folder. Add following dependencies. Sync the project with the new gradle files.
+3. **(Skip this if step 1 works)**. *Update the `build.gradle.kts` under `{projectRoot}/app` folder, and add following dependencies. Sync the project with the new gradle config*.
 ```diff
 dependencies {
 ...
@@ -100,8 +102,8 @@ dependencies {
 ### 2.2 Start an immersive scene
 1. Copy the skybox image `skybox.jpg` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/res/drawable`, and copy the room model file `environment.glb` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.  
    <img src="img/skybox_room_model.png" width=320>
-2. Under `{projectRoot}/app/src/quest` folder, create a new folder named `java` with a new package `com.meta.media.template` under it.
-3. Create a new kotlin file `ImmersiveActivity.kt` under the package we created. With following content.
+2. Under `{projectRoot}/app/src/quest` folder, create a new folder named `java`, and then create a new package `com.meta.media.template` under `java`.
+3. Create a new kotlin file `ImmersiveActivity.kt` under the package we created with following content.
 ```kotlin
 package com.meta.media.template
 
@@ -164,9 +166,41 @@ class ImmersiveActivity : AppSystemActivity() {
       )
    }
 ```
-5. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/main`, comment-out or delete the `activity` tags under the `application` tags.  
+5. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/main`, comment out the `activity` tags under the `application` tags.  
    <img src="img/comment_out_manifest.png" width=480>
-6. Open the `AdnroidManifest.xml` under `{projectRoot}/app/src/quest`, with following code changes under `manifest` tag. This step added need features for the app and update the main entry of the app to the ImmersiveActivity.
+6. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest`, add the new ImmersiveActivity inside the `application` tag, comment out the `intent-filter` from MainActivity.
+```diff
+...
+    <application
+    ...
+    android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:exported="true"
+            android:allowEmbedded="true">
+-           <intent-filter>
+-               <action android:name="android.intent.action.MAIN" />
+-               <category android:name="android.intent.category.LAUNCHER" />
+-           </intent-filter>
+        </activity>
++       <activity
++            android:name=".ImmersiveActivity"
++            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
++            android:launchMode="singleTask"
++            android:excludeFromRecents="false"
++            android:screenOrientation="landscape"
++            android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
++            android:exported="true">
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN" />
++                <category android:name="com.oculus.intent.category.VR" />
++                <category android:name="android.intent.category.LAUNCHER" />
++            </intent-filter>
++        </activity>
+    </application>
+```
+7. Open the `AdnroidManifest.xml` under `{projectRoot}/app/src/quest`, with following code changes under `manifest` tag. This step adds Meta Quest features and permissions for the app.
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -189,33 +223,8 @@ class ImmersiveActivity : AppSystemActivity() {
 
     <uses-permission android:name="android.permission.INTERNET" />
 ...
-
-       <activity
-           android:name=".MainActivity"
-           android:screenOrientation="landscape"
-           android:exported="true"
-           android:allowEmbedded="true">
--           <intent-filter>
--               <action android:name="android.intent.action.MAIN" />
--               <category android:name="android.intent.category.LAUNCHER" />
--           </intent-filter>
-       </activity>
-+      <activity
-+           android:name=".ImmersiveActivity"
-+           android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-+           android:launchMode="singleTask"
-+           android:excludeFromRecents="false"
-+           android:screenOrientation="landscape"
-+           android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
-+           android:exported="true">
-+           <intent-filter>
-+               <action android:name="android.intent.action.MAIN" />
-+               <category android:name="com.oculus.intent.category.VR" />
-+               <category android:name="android.intent.category.LAUNCHER" />
-+           </intent-filter>
-+       </activity>
 ```
-6. Start the app on Quest device, you should see an immersive scene like below.  
+8. Start the app on Meta Quest device, and you should see an immersive scene like below.  
    <img src="img/immersive_scene.jpg" width=640>
 
 ### 2.3 Import the panel
@@ -225,7 +234,7 @@ class ImmersiveActivity : AppSystemActivity() {
     <item type="id" name="main_panel" />
 </resources>
 ```
-2. In `ImmsersiveActivity.kt`, override the method `registerPanels` in ImmersiveActivity to register a panel.
+2. In `ImmsersiveActivity.kt`, override the method `registerPanels` in ImmersiveActivity class to register a panel configuration.
 ```diff
 +import android.content.Intent
 +import com.meta.spatial.toolkit.PanelRegistration
@@ -272,18 +281,17 @@ override fun onSceneReady() {
 }
 ```
 4. Start the app, you should see the panel is displayed in the center of the scene.  
-   <img src="img/panel_display.jpg" width=640>
+<img src="img/panel_display.jpg" width=640>
 
 ## 3. Core 3D capabilities
-This section covers
-* Add lighting to the immersive environment.
-* Import gltf 3D model to the scene.
-* Basic physics for 3D.
+* Add lighting to the immersive environment
+* Import gltf 3D model to the scene
+* Basic physics for 3D
 
 ### 3.1 Add Lighting
 1. Copy the IBL(Image Based Lighting) file `chromatic.env` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.  
-   <img src="img/lighting_file.png" width=320>
-2. In `ImmersirveActivity.kt`, add following code to `onSceneReady` method. `scene.setLightingEnvironment` set the environment lighting for the scene, and mixed up with Image Based Lighting which set by `scene.updateIBLEnvironment`.
+<img src="img/lighting_file.png" width=320>
+2. In `ImmersiveActivity.kt`, add following code to `onSceneReady` method. `scene.setLightingEnvironment` set the environment lighting for the scene, and mixed up with Image Based Lighting which set by `scene.updateIBLEnvironment`.
 ```diff
 ...
   override fun onSceneReady() {
@@ -299,11 +307,11 @@ This section covers
 ...
 }
 ```
-3. Start the the app, now the scene become much brighter.  
-   <img src="img/lighting_env.jpg" width=640>
+3. Start the app, now the scene becomes much brighter.  
+<img src="img/lighting_env.jpg" width=640>
 
 ### 3.2 Enable physics
-1. Enable the physics features in `ImmersiveActivity`'s feature list. Update the `registerFeatures` method.
+1. Enable the PhysicsFeature by updating the `registerFeatures` method in `ImmersiveActivity`.
 ```diff
 +import com.meta.spatial.physics.PhysicsFeature
 
@@ -314,8 +322,8 @@ This section covers
   }
 ...
 ```
-2. Copy the TV controller model file `Controller.glb` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.
-3. In `ImmersiveActivity`'s `onSceneReady` method, Replace the cube entity with the TV controller 3D model. Add `Grabbable` and `Physics` component to the entity. `Grabbable` make the model can be grabbed by controllers' grab key.
+2. Copy the media controller model file `Controller.glb` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.
+3. In `ImmersiveActivity`'s `onSceneReady` method, Replace the cube entity with the media controller model, including `Grabbable` and `Physics` components.
 ```diff
 +import com.meta.spatial.physics.Physics
 +import com.meta.spatial.physics.PhysicsState
@@ -351,7 +359,7 @@ This section covers
   }
 
 ```
-4. Inside `onSceneReady` method, create an invisible floor so the controller model can interact with it and won't fall out of the scene.
+4. Inside `onSceneReady` method, create an invisible floor so the media controller can drop on it and won't fall out of the scene.
 ```diff
 ...
   override fun onSceneReady() {
@@ -376,5 +384,5 @@ This section covers
 ...
 }
 ```
-5. Start the app, try grab the TV controller from the floor, and release the grab key to see what happens.  
+5. Start the app, try grab the media controller from the floor with the grab key, then release the grab key to see what happens.  
    <img src="img/physics.gif" width=640>

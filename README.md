@@ -4,11 +4,16 @@ This is an template app demonstrates how to integrate Meta Spatial SDK with a re
 ## Requirements
 MediaSpatialAppTemplate requires or works with
 * Android Studio
-* Quest Devices
+* Meta Quest Devices
+* Meta Spatial Editor
 * Horizon OS
 
 ## Code labs
 [code labs](codelabs/codelabs.md)
+
+## Meta Spatial SDK
+[Documentation](https://developers.meta.com/horizon/develop/spatial-sdk)
+[Samples](https://github.com/meta-quest/Meta-Spatial-SDK-Samples)
 
 ## Contribution
 See the [CONTRIBUTING](CONTRIBUTING.md) file for how to help out.
