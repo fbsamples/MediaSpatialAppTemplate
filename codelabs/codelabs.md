@@ -16,7 +16,8 @@
 3. Open and import the project into Android Studio, wait the project synced by the gradle task.
 4. Switch the Android Studio to Project view.   
 <img src="img/project_view.png" width=320 />
-5. (Optional) Start the app in Android Emulator. You will see something like the following screenshot. Then stop the running Android device.    
+
+5. (Optional) Start the app in Android Emulator. You will see something like the following screenshot. Then stop the running Android device.  
 <img src="img/run_app.gif" width=320 />  
 <img src="img/emulator_screen.png" width=320 />
 
@@ -36,13 +37,16 @@ android {
 }
 ```
 2. Create two new folders under `{projectRoot}/app/src` with names `mobile` and `quest`. We'll use these folders to manage the differences between the phone version and the Meta Quest version of our app.
-4. Copy the `AndroidManifest.xml` from `{projectRoot}/src/main` folder into the new folders.  
+3. Copy the `AndroidManifest.xml` from `{projectRoot}/src/main` folder into the new folders.  
 <img src="img/build_flavors.png" width=320 />
-5. Sync the project with the new gradle config.  
+
+4. Sync the project with the new gradle config.  
 <img src="img/ide_gradle.gif" width="320" />
-6. Switch current build variant to 'quest'. In menu, select `Build -> Select Build Variant`. In the Build Variants window, select `questDebug` as the active build variant.  
+
+5. Switch current build variant to 'quest'. In menu, select `Build -> Select Build Variant`. In the Build Variants window, select `questDebug` as the active build variant.  
 <img src="img/build_variant.png" width=320 />
-7. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest` folder, add `android:screenOrientation` inside `activity` tag of the `MainActivity`, and set the screen orientation to landscape.
+
+6. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest` folder, add `android:screenOrientation` inside `activity` tag of the `MainActivity`, and set the screen orientation to landscape.
 ```diff
 <?xml version="1.0" encoding="utf-8"?>
 ...
@@ -53,9 +57,9 @@ android {
 +          android:screenOrientation="landscape"
 ...
 ```
-8. Connect a Meta Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.  
+7. Connect a Meta Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.  
    <img src="img/start_app.png" width="320" >
-9. Put on your headset, you will see the app is launched in landscape mode.  
+8. Put on your headset, you will see the app is launched in landscape mode.  
    <img src="img/quest_screenshot.jpeg" width="640" >
 
 ## 2. Display the app in an immersive scene
@@ -291,22 +295,24 @@ override fun onSceneReady() {
 ### 3.1 Add Lighting
 1. Copy the IBL(Image Based Lighting) file `chromatic.env` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.  
 <img src="img/lighting_file.png" width=320>
-2. In `ImmersiveActivity.kt`, add following code to `onSceneReady` method. `scene.setLightingEnvironment` set the environment lighting for the scene, and mixed up with Image Based Lighting which set by `scene.updateIBLEnvironment`.
+
+2. In `ImmersiveActivity.kt`, add following code to `onSceneReady` method.
+
 ```diff
-...
   override fun onSceneReady() {
     super.onSceneReady()
     scene.setViewOrigin(0.0f, 0.0f, 0.0f)
-+    scene.setLightingEnvironment(
-+      ambientColor = Vector3(1.0f, 1.0f, 0.5f),
-+      sunColor = Vector3(1.0f, 1.0f, 0.5f),
-+      sunDirection = -Vector3(1.0f, 3.0f, 2.0f),
-+      environmentIntensity = 0.5f
-+    )
-+    scene.updateIBLEnvironment("chromatic.env")
-...
-}
+    scene.setLightingEnvironment(
+      ambientColor = Vector3(1.0f, 1.0f, 0.5f),
+      sunColor = Vector3(1.0f, 1.0f, 0.5f),
+      sunDirection = -Vector3(1.0f, 3.0f, 2.0f),
+      environmentIntensity = 0.5f
+    )
+    scene.updateIBLEnvironment("chromatic.env")
+  ...
+  }
 ```
+
 3. Start the app, now the scene becomes much brighter.  
 <img src="img/lighting_env.jpg" width=640>
 
