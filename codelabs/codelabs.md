@@ -722,8 +722,8 @@ This section covers
 ```
 package com.meta.media.template
 
-import com.meta.aether.core.ComponentBase
-import com.meta.aether.core.ComponentCompanion
+import com.meta.spatial.core.ComponentBase
+import com.meta.spatial.core.ComponentCompanion
 
 class LookAtUser : ComponentBase() {
     override fun typeID(): Int {
@@ -751,11 +751,11 @@ We don't have any attributes for our component, so we only need the required ove
 ```
 package com.meta.media.template
 
-import com.meta.aether.core.Pose
-import com.meta.aether.core.Quaternion
-import com.meta.aether.core.Query
-import com.meta.aether.core.SystemBase
-import com.meta.aether.toolkit.Transform
+import com.meta.spatial.core.Pose
+import com.meta.spatial.core.Quaternion
+import com.meta.spatial.core.Query
+import com.meta.spatial.core.SystemBase
+import com.meta.spatial.toolkit.Transform
 
 class LookAtUserSystem : SystemBase() {
 
