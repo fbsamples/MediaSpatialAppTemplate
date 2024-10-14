@@ -1,3 +1,4 @@
 data:
   tabs:
-    []
+    - AppScene
+  current_tab: AppScene
