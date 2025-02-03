@@ -57,7 +57,7 @@ entities:
             - 1.29999995
             - 2
         com.meta.spatial.toolkit.Panel:
-          panel: "@id/main_panel"
+          panel: "@id/ui_example"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Panel 1
