@@ -1,11 +1,14 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/* // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
 package com.meta.media.template
 
 import android.net.Uri
+import android.os.Bundle
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.physics.PhysicsFeature
+import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -13,6 +16,7 @@ import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.vr.VRFeature
+import java.io.File
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,7 +54,8 @@ class ImmersiveActivity : AppSystemActivity() {
 
           // TODO: get the robot and the basketBall entities from the composition
 
-          // TODO add the LookAt component to the robot so it points at the basketBall
+          // TODO: add the LookAt component to the robot so it points at the basketBall
+
         }
     Entity.create(
         listOf(
@@ -72,6 +77,10 @@ class ImmersiveActivity : AppSystemActivity() {
           // "MainActivity" is passed along here as the Activity that will be launched inside
           // of this Panel. You can pass standard Android activities or layout XML.
           activityClass = MainActivity::class.java
-        })
+        },
+        // TODO: register a second panel
+
+    )
   }
 }
+ */

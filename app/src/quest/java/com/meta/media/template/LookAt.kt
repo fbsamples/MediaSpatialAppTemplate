@@ -1,6 +1,6 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/* // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.spatial.samples.customcomponentsstartersample
+package com.meta.media.template
 
 import com.meta.spatial.core.BooleanAttribute
 import com.meta.spatial.core.ComponentBase
@@ -32,7 +32,7 @@ class LookAt(
   var offset by Vector3Attribute("offset", R.id.LookAt_offset, this, offset)
 
   override fun typeID(): Int {
-    return LookAt.id
+    return id
   }
 
   companion object : ComponentCompanion {
@@ -40,3 +40,4 @@ class LookAt(
     override val createDefaultInstance = { LookAt() }
   }
 }
+ */

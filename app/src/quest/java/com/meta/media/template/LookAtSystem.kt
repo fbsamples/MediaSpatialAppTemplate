@@ -1,7 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/* // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.spatial.samples.customcomponentsstartersample
+package com.meta.media.template
 
+import com.meta.media.template.LookAt
+import com.meta.media.template.LookAtAxis
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
@@ -67,3 +69,4 @@ class LookAtSystem() : SystemBase() {
     lastTime = currentTime
   }
 }
+ */
