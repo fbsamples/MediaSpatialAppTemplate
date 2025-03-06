@@ -1,4 +1,4 @@
-<!-- <ComponentSchema
+<ComponentSchema
   packageName="com.meta.media.template"
 >
   <Enum name="LookAtAxis">
@@ -13,4 +13,3 @@
     <Vector3Attribute name="offset" defaultValue="0.0f, 0.0f, 0.0f" />
   </Component>
 </ComponentSchema>
- -->
