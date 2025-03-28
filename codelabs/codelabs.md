@@ -14,11 +14,11 @@
 1. Make sure the [requirements](#requirements) are met.
 2. Download the project [zip](https://codeload.github.com/fbsamples/MediaSpatialAppTemplate/zip/refs/heads/main), and unzip the project.
 3. Open and import the project into Android Studio, wait the project synced by the gradle task.
-4. Switch the Android Studio to Project view.  
+4. Switch the Android Studio to Project view.
 <img src="img/project_view.png" width=320 />
 
-5. (Optional) Start the app in Android Emulator. You will see something like the following screenshot. Then stop the running Android device.  
-<img src="img/run_app.gif" width=320 />  
+5. (Optional) Start the app in Android Emulator. You will see something like the following screenshot. Then stop the running Android device.
+<img src="img/run_app.gif" width=320 />
 <img src="img/emulator_screen.png" width=320 />
 
 ### 1.2 Add quest build flavor
@@ -37,14 +37,14 @@ android {
 }
 ```
 2. Create two new folders under `{projectRoot}/app/src` with names `mobile` and `quest`. We'll use these folders to manage the differences between the phone version and the Meta Quest version of our app.
-3. Copy the `AndroidManifest.xml` from `{projectRoot}/src/main` folder into the new folders.  
+3. Copy the `AndroidManifest.xml` from `{projectRoot}/src/main` folder into the new folders.
 <img src="img/build_flavors.png" width=320 />
 
 4. Sync the project with the new gradle config.
-<img src="img/ide_gradle.gif" width="320" />  
+<img src="img/ide_gradle.gif" width="320" />
 
 5. Switch current build variant to 'quest'. In menu, select `Build -> Select Build Variant`. In the Build Variants window, select `questDebug` as the active build variant.
-<img src="img/build_variant.png" width=320 />  
+<img src="img/build_variant.png" width=320 />
 
 6. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest` folder, add `android:screenOrientation` inside `activity` tag of the `MainActivity`, and set the screen orientation to landscape.
 ```diff
@@ -57,9 +57,9 @@ android {
 +          android:screenOrientation="landscape"
 ...
 ```
-7. Connect a Meta Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.  
+7. Connect a Meta Quest device to your MAC/PC, select the connected device in Android Studio as the target device, and start the app.
    <img src="img/start_app.png" width="320" />
-8. Put on your headset, you will see the app is launched in landscape mode.  
+8. Put on your headset, you will see the app is launched in landscape mode.
    <img src="img/quest_screenshot.jpeg" width="640" />
 
 ## 2. Display the app in an immersive scene
@@ -83,7 +83,7 @@ dependencies {
 ...
 }
 ```
-2. **(Skip this if step 1 works)**. *Create a new folder named `libs` under `{projectRoot}/app` folder, and copy all .aar files from `{projectRoot}/codelabs/resources/libs` to here*.  
+2. **(Skip this if step 1 works)**. *Create a new folder named `libs` under `{projectRoot}/app` folder, and copy all .aar files from `{projectRoot}/codelabs/resources/libs` to here*.
    <img src="img/sdk_aars.png" width=320>
 3. **(Skip this if step 1 works)**. *Update the `build.gradle.kts` under `{projectRoot}/app` folder, and add following dependencies. Sync the project with the new gradle config*.
 ```diff
@@ -104,7 +104,7 @@ dependencies {
 ```
 
 ### 2.2 Start an immersive scene
-1. Copy the skybox image `skybox.jpg` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/res/drawable`, and copy the room model file `environment.glb` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.  
+1. Copy the skybox image `skybox.jpg` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/res/drawable`, and copy the room model file `environment.glb` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.
    <img src="img/skybox_room_model.png" width=320>
 2. Under `{projectRoot}/app/src/quest` folder, create a new folder named `java`, and then create a new package `com.meta.media.template` under `java`.
 3. Create a new kotlin file `ImmersiveActivity.kt` under the package we created with following content.
@@ -135,7 +135,7 @@ class ImmersiveActivity : AppSystemActivity() {
 +import com.meta.spatial.core.Quaternion
 +import com.meta.spatial.core.Vector3
 +import com.meta.spatial.toolkit.Box
-+import com.meta.spatial.toolkit.Color4
++import com.meta.spatial.core.Color4
 +import com.meta.spatial.toolkit.Material
 +import com.meta.spatial.toolkit.Mesh
 +import com.meta.spatial.toolkit.Transform
@@ -170,7 +170,7 @@ class ImmersiveActivity : AppSystemActivity() {
       )
    }
 ```
-5. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/main`, comment out the `activity` tags under the `application` tags.  
+5. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/main`, comment out the `activity` tags under the `application` tags.
    <img src="img/comment_out_manifest.png" width=480>
 6. Open the `AndroidManifest.xml` under `{projectRoot}/app/src/quest`, add the new ImmersiveActivity inside the `application` tag, comment out the `intent-filter` from MainActivity.
 ```diff
@@ -228,7 +228,7 @@ class ImmersiveActivity : AppSystemActivity() {
     <uses-permission android:name="android.permission.INTERNET" />
 ...
 ```
-8. Start the app on Meta Quest device, and you should see an immersive scene like below.  
+8. Start the app on Meta Quest device, and you should see an immersive scene like below.
    <img src="img/immersive_scene.jpg" width=640 />
 
 ### 2.3 Import the panel
@@ -284,7 +284,7 @@ override fun onSceneReady() {
 +   )
 }
 ```
-4. Start the app, you should see the panel is displayed in the center of the scene.  
+4. Start the app, you should see the panel is displayed in the center of the scene.
 <img src="img/panel_display.jpg" width=640 />
 
 ## 3. Core 3D capabilities
@@ -293,7 +293,7 @@ override fun onSceneReady() {
 * Basic physics for 3D
 
 ### 3.1 Add Lighting
-1. Copy the IBL(Image Based Lighting) file `chromatic.env` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.  
+1. Copy the IBL(Image Based Lighting) file `chromatic.env` from `{projectRoot}/codelabs/resources/assets` to `{projectRoot}/app/src/quest/assets`.
 <img src="img/lighting_file.png" width=320 />
 
 2. In `ImmersiveActivity.kt`, add following code to `onSceneReady` method.
@@ -313,7 +313,7 @@ override fun onSceneReady() {
   }
 ```
 
-3. Start the app, now the scene becomes much brighter.  
+3. Start the app, now the scene becomes much brighter.
 <img src="img/lighting_env.jpg" width=640 />
 
 ### 3.2 Enable physics
@@ -390,7 +390,7 @@ override fun onSceneReady() {
 ...
 }
 ```
-5. Start the app, try grab the media controller from the floor with the grab key, then release the grab key to see what happens.  
+5. Start the app, try grab the media controller from the floor with the grab key, then release the grab key to see what happens.
    <img src="img/physics.gif" width=640 />
 
 ## 4. Learning the Spatial Editor basics
