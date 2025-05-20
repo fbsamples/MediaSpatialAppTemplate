@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Media App Template</string>
+    <string
+        name="video_back_button_content_description"
+        description="Accessibility text announced when the back button is focused, indicating that pressing it will return to the previous screen"
+        >Back to previous screen</string>
 </resources>
